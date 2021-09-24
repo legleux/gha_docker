@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: legleux/flask_sanity
+        uses: legleux/flask-sanity
         with:
           who-to-greet: 'Babycakes'
       # Use the output from the `hello` step
