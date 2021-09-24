@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: legleux/flask-sanity
+        uses: actions/hello-world-docker-action@v1
         with:
           who-to-greet: 'Babycakes'
       # Use the output from the `hello` step
