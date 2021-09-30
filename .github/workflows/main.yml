@@ -39,4 +39,4 @@ jobs:
           mkdir build
           cd build
           cmake -DBoost_NO_BOOST_CMAKE=ON ..
-          cmake --build . --target help --parallel $(nproc)
+          cmake --build . --target dpkg --parallel $(nproc)
