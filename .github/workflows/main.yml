@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-18.04
     container:
       # image: docker://rippleci/rippled-ci-builder:2944b78d22db
-      image: legleux/rippled-dpkg-builder
+      image: legleux/rippled-dpkg-builder:legleux
     steps:
       - name: checkout
         uses: actions/checkout@v2
