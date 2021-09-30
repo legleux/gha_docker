@@ -31,7 +31,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/legleux/rippled-packages.git
+          repository: legleux/rippled-packages
       - name: build
         run: |
           cd rippled-packages && mkdir build
