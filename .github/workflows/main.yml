@@ -29,14 +29,19 @@ jobs:
     #   # image: docker://rippleci/rippled-ci-builder:2944b78d22db
     #   image: legleux/rippled-dpkg-builder:legleux
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           repository: legleux/rippled-packages
-      - name: build
+      - name: Build deb
         run: |
           ls -lah
           mkdir build
           cd build
           cmake -DBoost_NO_BOOST_CMAKE=ON ..
           cmake --build . --target dpkg --parallel $(nproc)
+      - name: Save packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb packages
+          path: packages
