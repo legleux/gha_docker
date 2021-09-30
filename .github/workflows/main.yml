@@ -34,7 +34,8 @@ jobs:
           repository: legleux/rippled-packages
       - name: build
         run: |
-          cd rippled-packages && mkdir build
+          ls -lah
+          mkdir build
           cd build
           cmake -DBoost_NO_BOOST_CMAKE=ON ..
           cmake --build . --target xrpl_core --parallel $(nproc)
