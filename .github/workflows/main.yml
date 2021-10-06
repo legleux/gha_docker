@@ -36,6 +36,8 @@ jobs:
         with:
           name: some file
           path: afile.txt
+      - name: Run Script
+        run: myscript.sh
 
       - name: Use file
         run: |
