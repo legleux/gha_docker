@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Make file
         run: |
-          touch afile.txt
+          echo "I r content" > afile.txt
       - name: Save file
         uses: actions/upload-artifact@v2
         with:
@@ -39,4 +39,4 @@ jobs:
 
       - name: Use file
         run: |
-          docker run centos:7 /bin/bash -c "echo hello"
+          docker run -v $PWD/afile.txt:/script/afile.txt centos:7 /bin/bash -c "cat /script/afile.txt"
