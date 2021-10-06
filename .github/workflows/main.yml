@@ -20,28 +20,23 @@ name: Build packages
 on:
   push:
     branches:
-      - main
+      - artifact
 
 jobs:
   package_job:
     runs-on: ubuntu-18.04
-    # container:
-    #   # image: docker://rippleci/rippled-ci-builder:2944b78d22db
-    #   image: legleux/rippled-dpkg-builder:legleux
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          repository: legleux/rippled-packages
-      - name: Build deb
+      - name: Make file
         run: |
-          ls -lah
-          mkdir build
-          cd build
-          cmake -DBoost_NO_BOOST_CMAKE=ON ..
-          cmake --build . --target dpkg --parallel $(nproc)
-      - name: Save packages
+          touch afile.txt
+      - name: Save file
         uses: actions/upload-artifact@v2
         with:
-          name: deb packages
-          path: packages
+          name: some file
+          path: afile.txt
+
+      - name: Use file
+        run: |
+          docker run centos:7 /bin/bash -c "echo hello"
