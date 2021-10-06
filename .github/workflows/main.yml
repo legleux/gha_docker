@@ -37,8 +37,8 @@ jobs:
           name: some file
           path: afile.txt
       - name: Run Script
-        run: ls -l
+        run: ./myscript.sh
 
       - name: Use file
         run: |
-          docker run -v $PWD/afile.txt:/script/afile.txt centos:7 /bin/bash -c "cat /script/afile.txt"
+          docker run -v $PWD/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "cat /script/myscript.sh"
