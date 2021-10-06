@@ -30,15 +30,13 @@ jobs:
         uses: actions/checkout@v2
       - name: Make file
         run: |
-          echo "I r content" > afile.txt
+          echo $GITHUB_SHA >> ./myscript.sh
       - name: Save file
         uses: actions/upload-artifact@v2
         with:
-          name: some file
-          path: afile.txt
-      - name: Run Script
-        run: ./myscript.sh
+          name: My Script
+          path: ./myscript.sh
 
-      - name: Use file
+      - name: Use Script in Docker
         run: |
           docker run -v $PWD/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "cat /script/myscript.sh"
