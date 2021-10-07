@@ -17,7 +17,7 @@ jobs:
       - name: Save file
         uses: actions/upload-artifact@v2
         with:
-          name: My Script
+          name: test_script
           path: scripts
   test_centos:
     needs: package_job
@@ -26,7 +26,8 @@ jobs:
       - name: Get artifacts
         uses: actions/download-artifact@v2
         with:
-          name: scripts
+          name: test_scripts
+          path: scripts
       - name: Use Script in Docker
         run: |
           docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "/script/myscript.sh Cool!"
@@ -37,7 +38,8 @@ jobs:
       - name: Get artifacts
         uses: actions/download-artifact@v2
         with:
-          name: scripts
+          name: test_scripts
+          path: scripts
       - name: Use Script in Docker
         run: |
           docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh ubuntu:20.04 /bin/bash -c "/script/myscript.sh Cool!"
