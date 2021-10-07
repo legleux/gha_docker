@@ -1,26 +1,5 @@
-# on: [push]
-
-# jobs:
-#   hello_world_job:
-#     runs-on: ubuntu-latest
-#     name: A job to say hello
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#       - name: Hello world action step
-#         id: hello
-#         uses: ./
-#         with:
-#           who-to-greet: 'Babycakes'
-#       # Use the output from the `hello` step
-#       - name: Get the output time
-#         run: echo "The time was ${{ steps.hello.outputs.time }}"
-
 name: Build packages
-on:
-  push:
-    branches:
-      - artifact
+on: push
 
 jobs:
   package_job:
@@ -30,13 +9,33 @@ jobs:
         uses: actions/checkout@v2
       - name: Make file
         run: |
-          echo $GITHUB_SHA >> ./myscript.sh
+          echo -e "\n$GITHUB_SHA" >> ./myscript.sh
+      - name: Move file
+        run: |
+          mkdir scripts
+          cp ./myscript.sh ./scripts/myscript.sh
       - name: Save file
         uses: actions/upload-artifact@v2
         with:
           name: My Script
-          path: ./myscript.sh
-
+          path: scripts
+  test_centos:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Get artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: scripts
       - name: Use Script in Docker
         run: |
-          docker run -v $PWD/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "/script/myscript.sh Cool!"
+          docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "/script/myscript.sh Cool!"
+  test_ubuntu:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Get artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: scripts
+      - name: Use Script in Docker
+        run: |
+          docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh ubuntu:20.04 /bin/bash -c "/script/myscript.sh Cool!"
