@@ -13,7 +13,7 @@ jobs:
       - name: Move file
         run: |
           mkdir scripts
-          cp ./myscript.sh ./scripts/myscript.sh
+          cp -p ./myscript.sh ./scripts/myscript.sh
       - name: Save file
         uses: actions/upload-artifact@v2
         with:
