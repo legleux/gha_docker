@@ -39,4 +39,4 @@ jobs:
 
       - name: Use Script in Docker
         run: |
-          docker run -v $PWD/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "cat /script/myscript.sh"
+          docker run -v $PWD/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "/script/myscript.sh Cool!"
