@@ -28,9 +28,11 @@ jobs:
         with:
           name: test_script
           path: scripts
+      - name: What is it?
+        run: ls -lah {,./scripts/myscript.sh}
       - name: Use Script in Docker
         run: |
-          docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "/script/myscript.sh Cool!"
+          docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "ls -lah /script/myscript.sh Cool!"
   test_ubuntu:
     needs: package_job
     runs-on: ubuntu-20.04
@@ -42,4 +44,4 @@ jobs:
           path: scripts
       - name: Use Script in Docker
         run: |
-          docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh ubuntu:20.04 /bin/bash -c "/script/myscript.sh Cool!"
+          docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh ubuntu:20.04 /bin/bash -c "ls -lah /script/myscript.sh Cool!"
