@@ -20,6 +20,7 @@ jobs:
           name: My Script
           path: scripts
   test_centos:
+    needs: package_job
     runs-on: ubuntu-20.04
     steps:
       - name: Get artifacts
@@ -30,6 +31,7 @@ jobs:
         run: |
           docker run -v $PWD/scripts/myscript.sh:/script/myscript.sh centos:7 /bin/bash -c "/script/myscript.sh Cool!"
   test_ubuntu:
+    needs: package_job
     runs-on: ubuntu-20.04
     steps:
       - name: Get artifacts
