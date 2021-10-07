@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Make file
         run: |
-          echo -e "\n$GITHUB_SHA" >> ./myscript.sh
+          echo -e "\necho $GITHUB_SHA" >> ./myscript.sh
       - name: Move file
         run: |
           mkdir scripts
