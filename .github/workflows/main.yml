@@ -14,7 +14,8 @@ jobs:
         run: |
           jq .client_payload "$GITHUB_EVENT_PATH"
       - name: Dump in another format
-        run: 'echo "client_payload: ${{ toJson(github.event.client_payload) }}"'
+        run: 'echo "client_payload: "'
+
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build pack
@@ -24,3 +25,12 @@ jobs:
         with:
           name: pkg_type
           path: packages
+      - name: write sha to readme
+        run: echo -e "\n${{github.event.client_payload}}" >> README.md
+      - name: Commit report
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git add README.md
+          git commit -m"Automated report"
+          git push
