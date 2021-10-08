@@ -1,6 +1,7 @@
 name: Build packages
-on: repository_dispatch
-
+on:
+  repository_dispatch:
+  workflow_dispatch:
 jobs:
   package_job:
     runs-on: ubuntu-18.04
