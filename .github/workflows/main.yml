@@ -1,6 +1,7 @@
 name: Build packages
 on:
   repository_dispatch:
+    types: [build, release]
   workflow_dispatch:
 jobs:
   package_job:
