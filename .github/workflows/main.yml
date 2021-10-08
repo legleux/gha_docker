@@ -1,47 +1,16 @@
-# on: [push]
-
-# jobs:
-#   hello_world_job:
-#     runs-on: ubuntu-latest
-#     name: A job to say hello
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#       - name: Hello world action step
-#         id: hello
-#         uses: ./
-#         with:
-#           who-to-greet: 'Babycakes'
-#       # Use the output from the `hello` step
-#       - name: Get the output time
-#         run: echo "The time was ${{ steps.hello.outputs.time }}"
-
 name: Build packages
-on:
-  push:
-    branches:
-      - main
+on: repository_dispatch
 
 jobs:
   package_job:
     runs-on: ubuntu-18.04
-    # container:
-    #   # image: docker://rippleci/rippled-ci-builder:2944b78d22db
-    #   image: legleux/rippled-dpkg-builder:legleux
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          repository: legleux/rippled-packages
-      - name: Build deb
-        run: |
-          ls -lah
-          mkdir build
-          cd build
-          cmake -DBoost_NO_BOOST_CMAKE=ON ..
-          cmake --build . --target dpkg --parallel $(nproc)
+      - name: Build pack
+        run: mkdir packages && echo "am package" >> packages/pkg_type
       - name: Save packages
         uses: actions/upload-artifact@v2
         with:
-          name: deb packages
+          name: pkg_type
           path: packages
