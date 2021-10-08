@@ -12,7 +12,7 @@ jobs:
           jq . "$GITHUB_EVENT_PATH"
       - name: Dump event payload
         run: |
-          jq . "$GITHUB_EVENT_PATH".client_payload
+          jq .client_payload "$GITHUB_EVENT_PATH"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build pack
