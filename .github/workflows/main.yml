@@ -26,7 +26,7 @@ jobs:
           name: pkg_type
           path: packages
       - name: write sha to readme
-        run: echo -e "\n${{github.event.client_payload}}" >> README.md
+        run: echo -e "\n${{github.event.client_payload.SHA}}" >> README.md
       - name: Commit report
         run: |
           git config --global user.name 'Your Name'
