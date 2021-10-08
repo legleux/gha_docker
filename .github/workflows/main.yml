@@ -14,7 +14,7 @@ jobs:
         run: |
           jq .client_payload "$GITHUB_EVENT_PATH"
       - name: Dump in another format
-      - run: 'echo "client_payload: ${{ toJson(github.event.client_payload) }}"'
+        run: 'echo "client_payload: ${{ toJson(github.event.client_payload) }}"'
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build pack
