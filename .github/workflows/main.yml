@@ -31,7 +31,7 @@ jobs:
           name: pkg_type
           path: packages
       - name: write sha to readme
-        run: "sed -i 's/commit: [\][.*[\]]/commit: [\][${{github.event.client_payload.SHA}}[\]]/g' README.md"
+        run: "sed -i 's/commit: \\[.*\\]/commit: \\[${{github.event.client_payload.SHA}}\\]/g' README.md"
       - name: Commit report
         run: |
           git config --global user.name 'Autobot'
