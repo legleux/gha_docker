@@ -29,7 +29,7 @@ jobs:
         run: echo -e "\n${{github.event.client_payload.SHA}}" >> README.md
       - name: Commit report
         run: |
-          git config --global user.name 'Your Name'
+          git config --global user.name 'Autobot'
           git config --global user.email 'your-username@users.noreply.github.com'
           git add README.md
           git commit -m"Automated report"
