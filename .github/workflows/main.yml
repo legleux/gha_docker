@@ -3,6 +3,11 @@ on:
   repository_dispatch:
     types: [build_packages, release_packages]
   workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
 jobs:
   package_job:
     runs-on: ubuntu-18.04
